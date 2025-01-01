@@ -3,13 +3,16 @@
 _realname=eza
 pkgbase=mingw-w64-${_realname}
 pkgname="${MINGW_PACKAGE_PREFIX}-${_realname}"
-pkgver=0.20.11
+pkgver=0.20.14
 pkgrel=1
 pkgdesc="A modern, maintained replacement for ls (mingw-w64)"
 arch=('any')
 mingw_arch=('ucrt64' 'clang64' 'clangarm64' 'mingw64')
 url='https://eza.rocks'
 msys2_repository_url='https://github.com/eza-community/eza'
+msys2_references=(
+  'purl: pkg:cargo/eza'
+)
 license=('spdx:EUPL-1.2')
 depends=("${MINGW_PACKAGE_PREFIX}-zlib"
          "${MINGW_PACKAGE_PREFIX}-libgit2")
@@ -18,9 +21,9 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-rust"
              "${MINGW_PACKAGE_PREFIX}-openssl"
              'git')
 optdepends=("${MINGW_PACKAGE_PREFIX}-ttf-font-nerd: for file icons")
-options=('!strip' '!lto')
+options=('!strip')
 source=("${_realname}::git+${msys2_repository_url}.git#tag=v${pkgver}")
-sha256sums=('8610ac88e3a1b842650ff334f01c7c3760b8c9716cb906f4889f5072ebb60a68')
+sha256sums=('acd3e8c0deb7feeb0989bb6bc8c55ffcb0e2c47cfbb857e521dbf57aa063ac9e')
 
 _env() {
   export LIBGIT2_NO_VENDOR=1

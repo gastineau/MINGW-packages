@@ -9,10 +9,13 @@ pkgdesc="Fancy cat for Markdown (mingw-w64)"
 arch=('any')
 mingw_arch=('ucrt64' 'clang64' 'clangarm64' 'mingw64')
 url='https://github.com/swsnr/mdcat'
+msys2_references=(
+  'purl: pkg:cargo/mdcat'
+)
 license=('spdx:MPL-2.0')
 depends=("${MINGW_PACKAGE_PREFIX}-curl")
 makedepends=("${MINGW_PACKAGE_PREFIX}-rust")
-options=('!strip' '!lto')
+options=('!strip')
 source=("${url}/archive/refs/tags/${_realname}-${pkgver}.tar.gz")
 sha256sums=('e372a82291a139f95d77c12325a2f595f47f6d6b4c2de70e50ab2117e975734f')
 prepare() {

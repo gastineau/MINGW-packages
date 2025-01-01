@@ -4,7 +4,7 @@ _realname=ruff
 pkgbase=mingw-w64-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}"
          "${MINGW_PACKAGE_PREFIX}-python-${_realname}")
-pkgver=0.8.2
+pkgver=0.8.4
 pkgrel=1
 pkgdesc="An extremely fast Python linter, written in Rust (mingw-w64)"
 arch=('any')
@@ -24,9 +24,9 @@ makedepends=(
   "${MINGW_PACKAGE_PREFIX}-python-installer"
   'git'
 )
-options=('!strip' '!lto')
+options=('!strip')
 source=("git+${msys2_repository_url}.git#tag=${pkgver}")
-sha256sums=('91258fc9858ce0d1e26ade22e1c15ae21cba009c929cb25d55e69c06669d9814')
+sha256sums=('938863035707237899d6f1cb3df5e393631ddf30dea0a6b77d8f083478510655')
 
 prepare() {
   cd "${_realname}"
@@ -34,7 +34,6 @@ prepare() {
   # otherwise cargo installs msvc toolchain from rustup
   rm rust-toolchain.toml
 
-  cargo update -p cc
   cargo fetch --locked
 }
 
@@ -42,9 +41,6 @@ build() {
   cd "${_realname}"
 
   export WINAPI_NO_BUNDLED_LIBRARIES=1
-  if [[ ${MINGW_PACKAGE_PREFIX} != *clang-* ]]; then
-    export CARGO_PROFILE_RELEASE_LTO="fat"
-  fi
   maturin build --release --strip --frozen --all-features
 }
 
